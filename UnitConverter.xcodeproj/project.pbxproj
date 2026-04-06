@@ -19,6 +19,10 @@
 		A100000002000007 /* DDConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000016 /* DDConverterTests.swift */; };
 		A100000002000008 /* DDMConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000017 /* DDMConverterTests.swift */; };
 		A100000002000009 /* DMSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000018 /* DMSConverterTests.swift */; };
+		A100000004000001 /* UTMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000010 /* UTMConverter.swift */; };
+		A100000004000002 /* MGRSConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000011 /* MGRSConverter.swift */; };
+		A100000004000003 /* UTMConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000012 /* UTMConverterTests.swift */; };
+		A100000004000004 /* MGRSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000013 /* MGRSConverterTests.swift */; };
 		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +52,10 @@
 		A100000002000017 /* DDMConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDMConverterTests.swift; sourceTree = "<group>"; };
 		A100000002000018 /* DMSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSConverterTests.swift; sourceTree = "<group>"; };
 		A100000003000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A100000004000010 /* UTMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMConverter.swift; sourceTree = "<group>"; };
+		A100000004000011 /* MGRSConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSConverter.swift; sourceTree = "<group>"; };
+		A100000004000012 /* UTMConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMConverterTests.swift; sourceTree = "<group>"; };
+		A100000004000013 /* MGRSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSConverterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +113,8 @@
 				A100000002000013 /* DDConverter.swift */,
 				A100000002000014 /* DDMConverter.swift */,
 				A100000002000015 /* DMSConverter.swift */,
+				A100000004000010 /* UTMConverter.swift */,
+				A100000004000011 /* MGRSConverter.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -124,6 +134,8 @@
 				A100000002000016 /* DDConverterTests.swift */,
 				A100000002000017 /* DDMConverterTests.swift */,
 				A100000002000018 /* DMSConverterTests.swift */,
+				A100000004000012 /* UTMConverterTests.swift */,
+				A100000004000013 /* MGRSConverterTests.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -244,6 +256,8 @@
 				A100000002000004 /* DDConverter.swift in Sources */,
 				A100000002000005 /* DDMConverter.swift in Sources */,
 				A100000002000006 /* DMSConverter.swift in Sources */,
+				A100000004000001 /* UTMConverter.swift in Sources */,
+				A100000004000002 /* MGRSConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +269,8 @@
 				A100000002000007 /* DDConverterTests.swift in Sources */,
 				A100000002000008 /* DDMConverterTests.swift in Sources */,
 				A100000002000009 /* DMSConverterTests.swift in Sources */,
+				A100000004000003 /* UTMConverterTests.swift in Sources */,
+				A100000004000004 /* MGRSConverterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
