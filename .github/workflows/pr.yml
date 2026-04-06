@@ -1,4 +1,4 @@
-name: PR Build & Test
+name: PR Build, Test & TestFlight
 
 on:
   pull_request:
@@ -9,7 +9,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-test:
+  test:
+    name: Build & Test
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
@@ -35,17 +36,7 @@ jobs:
           echo "name=$DEST" >> "$GITHUB_OUTPUT"
           echo "Using simulator: $DEST"
 
-      - name: Build
-        run: |
-          xcodebuild build \
-            -project UnitConverter.xcodeproj \
-            -scheme UnitConverter \
-            -destination 'platform=iOS Simulator,name=${{ steps.sim.outputs.name }}' \
-            -configuration Debug \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO
-
-      - name: Test
+      - name: Build & Test
         run: |
           xcodebuild test \
             -project UnitConverter.xcodeproj \
@@ -54,3 +45,31 @@ jobs:
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO
+
+  beta:
+    name: Deploy to TestFlight
+    needs: test
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          XCODE_PATH=$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE_PATH"
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Deploy to TestFlight
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: bundle exec fastlane beta

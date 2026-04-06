@@ -1,0 +1,5 @@
+git_url("https://github.com/evanmacdonald/ios-certificates.git")
+storage_mode("git")
+type("appstore")
+app_identifier("com.evanmacdonald.unit-converter")
+team_id("NU98D7J463")
