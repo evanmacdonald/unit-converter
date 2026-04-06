@@ -6,31 +6,31 @@ final class UTMConverterTests: XCTestCase {
     // MARK: - Parsing
 
     func testParseNorthernHemisphere() {
-        // Barcelona: 41.40338 N, 2.17403 E -> 31T 430959 4584041
-        let coord = UTMConverter.parse("31T 430959 4584041")
+        // Barcelona: 41.40338 N, 2.17403 E
+        let coord = UTMConverter.parse("31T 430960 4583867")
         XCTAssertNotNil(coord)
         XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 41.40338, longitude: 2.17403), accuracy: 1e-3))
     }
 
     func testParseSouthernHemisphere() {
-        // Sydney: -33.8688 S, 151.2093 E -> 56H 334786 6251080
-        let coord = UTMConverter.parse("56H 334786 6251080")
+        // Sydney: -33.8688 S, 151.2093 E
+        let coord = UTMConverter.parse("56H 334369 6250948")
         XCTAssertNotNil(coord)
         XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: -33.8688, longitude: 151.2093), accuracy: 1e-3))
     }
 
     func testParseWesternHemisphere() {
-        // New York: 40.7128 N, -74.0060 W -> 18T 583960 4507523
-        let coord = UTMConverter.parse("18T 583960 4507523")
+        // New York: 40.7128 N, -74.0060 W
+        let coord = UTMConverter.parse("18T 583959 4507351")
         XCTAssertNotNil(coord)
         XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 40.7128, longitude: -74.0060), accuracy: 1e-3))
     }
 
     func testParseEquator() {
-        // Point on equator: 0.0, 37.0 -> 37N 500000 0
+        // Point on equator: 0.0, 39.0 (central meridian of zone 37) -> 37N 500000 0
         let coord = UTMConverter.parse("37N 500000 0")
         XCTAssertNotNil(coord)
-        XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 0.0, longitude: 37.0), accuracy: 1e-3))
+        XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 0.0, longitude: 39.0), accuracy: 1e-3))
     }
 
     func testParseMalformedReturnsNil() {
