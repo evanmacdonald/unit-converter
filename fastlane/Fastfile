@@ -20,7 +20,8 @@ platform :ios do
       key_id: ENV["ASC_KEY_ID"],
       issuer_id: ENV["ASC_ISSUER_ID"],
       key_content: ENV["ASC_KEY_CONTENT"],
-      is_key_content_base64: true
+      is_key_content_base64: true,
+      in_house: false
     )
 
     sync_code_signing(
@@ -37,7 +38,14 @@ platform :ios do
     build_app(
       project: "UnitConverter.xcodeproj",
       scheme: "UnitConverter",
+      configuration: "Release",
       export_method: "app-store",
+      export_options: {
+        signingStyle: "manual",
+        provisioningProfiles: {
+          "com.evanmacdonald.unit-converter" => "match AppStore com.evanmacdonald.unit-converter"
+        }
+      },
       output_directory: "build",
       output_name: "UnitConverter.ipa"
     )
@@ -56,7 +64,8 @@ platform :ios do
       key_id: ENV["ASC_KEY_ID"],
       issuer_id: ENV["ASC_ISSUER_ID"],
       key_content: ENV["ASC_KEY_CONTENT"],
-      is_key_content_base64: true
+      is_key_content_base64: true,
+      in_house: false
     )
 
     sync_code_signing(
@@ -73,7 +82,14 @@ platform :ios do
     build_app(
       project: "UnitConverter.xcodeproj",
       scheme: "UnitConverter",
+      configuration: "Release",
       export_method: "app-store",
+      export_options: {
+        signingStyle: "manual",
+        provisioningProfiles: {
+          "com.evanmacdonald.unit-converter" => "match AppStore com.evanmacdonald.unit-converter"
+        }
+      },
       output_directory: "build",
       output_name: "UnitConverter.ipa"
     )
