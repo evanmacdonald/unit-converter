@@ -1,8 +1,7 @@
 name: App Store Release
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch: # Manual trigger only until ready for production
 
 concurrency:
   group: ${{ github.workflow }}
