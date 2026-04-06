@@ -10,6 +10,15 @@
 		A100000001000001 /* UnitConverterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000001000010 /* UnitConverterApp.swift */; };
 		A100000001000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000001000011 /* ContentView.swift */; };
 		A100000001000003 /* UnitConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000001000012 /* UnitConverterTests.swift */; };
+		A100000002000001 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000010 /* Coordinate.swift */; };
+		A100000002000002 /* CoordinateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000011 /* CoordinateFormat.swift */; };
+		A100000002000003 /* CoordinateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000012 /* CoordinateConverter.swift */; };
+		A100000002000004 /* DDConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000013 /* DDConverter.swift */; };
+		A100000002000005 /* DDMConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000014 /* DDMConverter.swift */; };
+		A100000002000006 /* DMSConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000015 /* DMSConverter.swift */; };
+		A100000002000007 /* DDConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000016 /* DDConverterTests.swift */; };
+		A100000002000008 /* DDMConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000017 /* DDMConverterTests.swift */; };
+		A100000002000009 /* DMSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000018 /* DMSConverterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +37,15 @@
 		A100000001000012 /* UnitConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverterTests.swift; sourceTree = "<group>"; };
 		A100000001000040 /* UnitConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A100000001000041 /* UnitConverterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitConverterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A100000002000010 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		A100000002000011 /* CoordinateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateFormat.swift; sourceTree = "<group>"; };
+		A100000002000012 /* CoordinateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateConverter.swift; sourceTree = "<group>"; };
+		A100000002000013 /* DDConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDConverter.swift; sourceTree = "<group>"; };
+		A100000002000014 /* DDMConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDMConverter.swift; sourceTree = "<group>"; };
+		A100000002000015 /* DMSConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSConverter.swift; sourceTree = "<group>"; };
+		A100000002000016 /* DDConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDConverterTests.swift; sourceTree = "<group>"; };
+		A100000002000017 /* DDMConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDMConverterTests.swift; sourceTree = "<group>"; };
+		A100000002000018 /* DMSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSConverterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,16 +80,49 @@
 			children = (
 				A100000001000010 /* UnitConverterApp.swift */,
 				A100000001000011 /* ContentView.swift */,
+				A100000002000020 /* Models */,
+				A100000002000021 /* Converters */,
 			);
 			path = UnitConverter;
+			sourceTree = "<group>";
+		};
+		A100000002000020 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A100000002000010 /* Coordinate.swift */,
+				A100000002000011 /* CoordinateFormat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A100000002000021 /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				A100000002000012 /* CoordinateConverter.swift */,
+				A100000002000013 /* DDConverter.swift */,
+				A100000002000014 /* DDMConverter.swift */,
+				A100000002000015 /* DMSConverter.swift */,
+			);
+			path = Converters;
 			sourceTree = "<group>";
 		};
 		A100000001000022 /* UnitConverterTests */ = {
 			isa = PBXGroup;
 			children = (
 				A100000001000012 /* UnitConverterTests.swift */,
+				A100000002000022 /* Converters */,
 			);
 			path = UnitConverterTests;
+			sourceTree = "<group>";
+		};
+		A100000002000022 /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				A100000002000016 /* DDConverterTests.swift */,
+				A100000002000017 /* DDMConverterTests.swift */,
+				A100000002000018 /* DMSConverterTests.swift */,
+			);
+			path = Converters;
 			sourceTree = "<group>";
 		};
 		A100000001000023 /* Products */ = {
@@ -183,6 +234,12 @@
 			files = (
 				A100000001000001 /* UnitConverterApp.swift in Sources */,
 				A100000001000002 /* ContentView.swift in Sources */,
+				A100000002000001 /* Coordinate.swift in Sources */,
+				A100000002000002 /* CoordinateFormat.swift in Sources */,
+				A100000002000003 /* CoordinateConverter.swift in Sources */,
+				A100000002000004 /* DDConverter.swift in Sources */,
+				A100000002000005 /* DDMConverter.swift in Sources */,
+				A100000002000006 /* DMSConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A100000001000003 /* UnitConverterTests.swift in Sources */,
+				A100000002000007 /* DDConverterTests.swift in Sources */,
+				A100000002000008 /* DDMConverterTests.swift in Sources */,
+				A100000002000009 /* DMSConverterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
