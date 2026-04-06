@@ -19,6 +19,7 @@
 		A100000002000007 /* DDConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000016 /* DDConverterTests.swift */; };
 		A100000002000008 /* DDMConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000017 /* DDMConverterTests.swift */; };
 		A100000002000009 /* DMSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000002000018 /* DMSConverterTests.swift */; };
+		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		A100000002000016 /* DDConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDConverterTests.swift; sourceTree = "<group>"; };
 		A100000002000017 /* DDMConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDMConverterTests.swift; sourceTree = "<group>"; };
 		A100000002000018 /* DMSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSConverterTests.swift; sourceTree = "<group>"; };
+		A100000003000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				A100000001000010 /* UnitConverterApp.swift */,
 				A100000001000011 /* ContentView.swift */,
+				A100000003000010 /* Assets.xcassets */,
 				A100000002000020 /* Models */,
 				A100000002000021 /* Converters */,
 			);
@@ -215,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A100000003000001 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
