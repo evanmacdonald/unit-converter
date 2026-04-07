@@ -13,6 +13,15 @@ struct ContentView: View {
                 outputSection
             }
             .navigationTitle("GPS Converter")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Clear") {
+                        viewModel.reset()
+                        copiedFormat = nil
+                    }
+                    .disabled(viewModel.inputText.isEmpty && viewModel.outputs.isEmpty)
+                }
+            }
         }
     }
 
