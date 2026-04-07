@@ -65,7 +65,7 @@ struct ContentView: View {
                         UIPasteboard.general.string = formatted
                     } label: {
                         Image(systemName: "doc.on.doc")
-                            .foregroundStyle(.accentColor)
+                            .foregroundStyle(Color.accentColor)
                     }
                     .buttonStyle(.borderless)
                     .accessibilityLabel("Copy formatted input")
@@ -98,7 +98,7 @@ struct ContentView: View {
                             }
                         } label: {
                             Image(systemName: copiedFormat == row.format ? "checkmark" : "doc.on.doc")
-                                .foregroundStyle(copiedFormat == row.format ? .green : .accentColor)
+                                .foregroundStyle(copiedFormat == row.format ? Color.green : Color.accentColor)
                         }
                         .buttonStyle(.borderless)
                         .accessibilityLabel("Copy \(row.format.rawValue)")
