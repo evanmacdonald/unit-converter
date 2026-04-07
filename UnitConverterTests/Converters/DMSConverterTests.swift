@@ -32,12 +32,12 @@ final class DMSConverterTests: XCTestCase {
 
     func testFormatNorthEast() {
         let result = DMSConverter.format(Coordinate(latitude: 41.40338, longitude: 2.17403))
-        XCTAssertEqual(result, "41°24'12.17\"N, 2°10'26.51\"E")
+        XCTAssertEqual(result, "41°24'12.1680\"N, 2°10'26.5080\"E")
     }
 
     func testFormatSouthWest() {
         let result = DMSConverter.format(Coordinate(latitude: -33.8688, longitude: -151.2093))
-        XCTAssertEqual(result, "33°52'7.68\"S, 151°12'33.48\"W")
+        XCTAssertEqual(result, "33°52'7.6800\"S, 151°12'33.4800\"W")
     }
 
     // MARK: - Round trip

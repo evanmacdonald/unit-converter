@@ -94,7 +94,7 @@ enum DMSConverter: CoordinateConverter {
         let lonMin = Int(lonMinFull)
         let lonSec = (lonMinFull - Double(lonMin)) * 60.0
 
-        return String(format: "%d°%d'%.2f\"%@, %d°%d'%.2f\"%@",
+        return String(format: "%d°%d'%.4f\"%@, %d°%d'%.4f\"%@",
                        latDeg, latMin, latSec, latDir,
                        lonDeg, lonMin, lonSec, lonDir)
     }
