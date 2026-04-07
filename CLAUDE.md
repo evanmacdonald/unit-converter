@@ -12,9 +12,9 @@ Single-page SwiftUI iOS app that converts GPS coordinates between 6 formats (DD,
 - **PR #2**: DD, DDM, DMS coordinate converters with TDD (23 tests)
 - **PR #3**: Full CI/CD pipeline — fastlane, TestFlight on PR, App Store manual deploy
 - **PR #4**: UTM + MGRS converters (TDD) — transverse Mercator projection math
+- **PR #5**: Plus Codes / Open Location Code converter (TDD) — full codes only in v1, 18 tests
 
 ### Remaining (in order)
-- **PR #5**: Plus Codes / Open Location Code converter (TDD) — full codes only in v1
 - **PR #6**: UI + ViewModel — format picker, input field, output rows with copy buttons
 - **PR #7**: Polish + App Store metadata, re-enable auto App Store deploy
 
@@ -77,6 +77,7 @@ UnitConverter/
     DMSConverter.swift            # Degrees Minutes Seconds
     UTMConverter.swift            # Universal Transverse Mercator
     MGRSConverter.swift           # Military Grid Reference System
+    PlusCodeConverter.swift       # Open Location Code (Plus Codes)
 UnitConverterTests/
   Converters/
     DDConverterTests.swift
@@ -84,6 +85,7 @@ UnitConverterTests/
     DMSConverterTests.swift
     UTMConverterTests.swift
     MGRSConverterTests.swift
+    PlusCodeConverterTests.swift
 .github/workflows/
   pr.yml                          # Build + test + TestFlight
   release.yml                     # App Store (manual trigger)
