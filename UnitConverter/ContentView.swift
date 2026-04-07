@@ -11,7 +11,7 @@ struct ContentView: View {
                     TextField("Enter coordinates (any format)", text: $viewModel.inputText)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
-                        .onChange(of: viewModel.inputText) {
+                        .onChange(of: viewModel.inputText) { _, _ in
                             viewModel.inputChanged()
                         }
                         .onSubmit { viewModel.convert() }
