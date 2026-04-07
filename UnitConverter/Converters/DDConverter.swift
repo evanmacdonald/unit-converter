@@ -15,6 +15,6 @@ enum DDConverter: CoordinateConverter {
     }
 
     static func format(_ coordinate: Coordinate) -> String {
-        String(format: "%f, %f", coordinate.latitude, coordinate.longitude)
+        String(format: "%.6f, %.6f", coordinate.latitude, coordinate.longitude)
     }
 }

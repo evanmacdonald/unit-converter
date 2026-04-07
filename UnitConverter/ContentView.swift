@@ -7,65 +7,104 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Input Format") {
-                    Picker("Format", selection: $viewModel.selectedFormat) {
-                        ForEach(CoordinateFormat.allCases) { format in
-                            Text(format.rawValue).tag(format)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
+                inputSection
+                formatSection
+                formattedSection
+                outputSection
+            }
+            .navigationTitle("GPS Converter")
+        }
+    }
 
-                Section("Coordinate") {
-                    TextField("Enter \(viewModel.selectedFormat.rawValue) coordinate", text: $viewModel.inputText)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .onSubmit { viewModel.convert() }
+    private var inputSection: some View {
+        Section("Coordinate") {
+            TextField("Enter coordinates (any format)", text: $viewModel.inputText)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .onSubmit { viewModel.convert() }
 
-                    Button("Convert") {
-                        viewModel.convert()
-                    }
-                    .frame(maxWidth: .infinity)
+            Button("Convert") {
+                viewModel.formatOverridden = false
+                viewModel.convert()
+            }
+            .frame(maxWidth: .infinity)
 
-                    if let error = viewModel.errorMessage {
-                        Text(error)
-                            .foregroundStyle(.red)
-                            .font(.caption)
-                    }
-                }
+            if let error = viewModel.errorMessage {
+                Text(error)
+                    .foregroundStyle(.red)
+                    .font(.caption)
+            }
+        }
+    }
 
-                if !viewModel.outputs.isEmpty {
-                    Section("Converted") {
-                        ForEach(viewModel.outputs) { row in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(row.format.rawValue)
-                                        .font(.caption)
-                                        .foregroundStyle(.secondary)
-                                    Text(row.value)
-                                        .font(.body.monospaced())
-                                }
-                                Spacer()
-                                Button {
-                                    UIPasteboard.general.string = row.value
-                                    copiedFormat = row.format
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                        if copiedFormat == row.format {
-                                            copiedFormat = nil
-                                        }
-                                    }
-                                } label: {
-                                    Image(systemName: copiedFormat == row.format ? "checkmark" : "doc.on.doc")
-                                        .foregroundStyle(copiedFormat == row.format ? .green : .accentColor)
-                                }
-                                .buttonStyle(.borderless)
-                                .accessibilityLabel("Copy \(row.format.rawValue)")
-                            }
-                        }
+    @ViewBuilder
+    private var formatSection: some View {
+        if viewModel.detectedFormat != nil || viewModel.formatOverridden {
+            Section(viewModel.formatOverridden ? "Input Format" : "Detected: \(viewModel.selectedFormat.rawValue)") {
+                Picker("Format", selection: Binding(
+                    get: { viewModel.selectedFormat },
+                    set: { viewModel.overrideFormat($0) }
+                )) {
+                    ForEach(CoordinateFormat.allCases) { format in
+                        Text(format.rawValue).tag(format)
                     }
                 }
             }
-            .navigationTitle("GPS Converter")
+        }
+    }
+
+    @ViewBuilder
+    private var formattedSection: some View {
+        if let formatted = viewModel.formattedInput {
+            Section("Formatted Input") {
+                HStack {
+                    Text(formatted)
+                        .font(.body.monospaced())
+                    Spacer()
+                    Button {
+                        UIPasteboard.general.string = formatted
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                            .foregroundStyle(Color.accentColor)
+                    }
+                    .buttonStyle(.borderless)
+                    .accessibilityLabel("Copy formatted input")
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var outputSection: some View {
+        if !viewModel.outputs.isEmpty {
+            Section("Converted") {
+                ForEach(viewModel.outputs) { row in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(row.format.rawValue)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(row.value)
+                                .font(.body.monospaced())
+                        }
+                        Spacer()
+                        Button {
+                            UIPasteboard.general.string = row.value
+                            copiedFormat = row.format
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                if copiedFormat == row.format {
+                                    copiedFormat = nil
+                                }
+                            }
+                        } label: {
+                            Image(systemName: copiedFormat == row.format ? "checkmark" : "doc.on.doc")
+                                .foregroundStyle(copiedFormat == row.format ? Color.green : Color.accentColor)
+                        }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel("Copy \(row.format.rawValue)")
+                    }
+                }
+            }
         }
     }
 }
