@@ -25,6 +25,8 @@
 		A100000004000004 /* MGRSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000013 /* MGRSConverterTests.swift */; };
 		A100000005000001 /* PlusCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000005000010 /* PlusCodeConverter.swift */; };
 		A100000005000002 /* PlusCodeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000005000011 /* PlusCodeConverterTests.swift */; };
+		A100000006000001 /* ConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000006000010 /* ConverterViewModel.swift */; };
+		A100000006000002 /* ConverterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000006000011 /* ConverterViewModelTests.swift */; };
 		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		A100000004000013 /* MGRSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSConverterTests.swift; sourceTree = "<group>"; };
 		A100000005000010 /* PlusCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCodeConverter.swift; sourceTree = "<group>"; };
 		A100000005000011 /* PlusCodeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCodeConverterTests.swift; sourceTree = "<group>"; };
+		A100000006000010 /* ConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModel.swift; sourceTree = "<group>"; };
+		A100000006000011 /* ConverterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 				A100000001000011 /* ContentView.swift */,
 				A100000003000010 /* Assets.xcassets */,
 				A100000002000020 /* Models */,
+				A100000006000020 /* ViewModels */,
 				A100000002000021 /* Converters */,
 			);
 			path = UnitConverter;
@@ -124,10 +129,19 @@
 			path = Converters;
 			sourceTree = "<group>";
 		};
+		A100000006000020 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A100000006000010 /* ConverterViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A100000001000022 /* UnitConverterTests */ = {
 			isa = PBXGroup;
 			children = (
 				A100000001000012 /* UnitConverterTests.swift */,
+				A100000006000011 /* ConverterViewModelTests.swift */,
 				A100000002000022 /* Converters */,
 			);
 			path = UnitConverterTests;
@@ -265,6 +279,7 @@
 				A100000004000001 /* UTMConverter.swift in Sources */,
 				A100000004000002 /* MGRSConverter.swift in Sources */,
 				A100000005000001 /* PlusCodeConverter.swift in Sources */,
+				A100000006000001 /* ConverterViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +294,7 @@
 				A100000004000003 /* UTMConverterTests.swift in Sources */,
 				A100000004000004 /* MGRSConverterTests.swift in Sources */,
 				A100000005000002 /* PlusCodeConverterTests.swift in Sources */,
+				A100000006000002 /* ConverterViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
