@@ -64,13 +64,4 @@ final class ConverterViewModel {
             .filter { $0 != selectedFormat }
             .map { OutputRow(format: $0, value: $0.converter.format(coordinate)) }
     }
-
-    /// Reset detection state when user starts typing new input.
-    func inputChanged() {
-        formatOverridden = false
-        detectedFormat = nil
-        formattedInput = nil
-        outputs = []
-        errorMessage = nil
-    }
 }

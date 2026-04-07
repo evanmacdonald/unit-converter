@@ -211,17 +211,20 @@ final class ConverterViewModelTests: XCTestCase {
         XCTAssertTrue(roundTrip!.isEqual(to: Coordinate(latitude: 41.40338, longitude: 2.17403), accuracy: 1e-4))
     }
 
-    // MARK: - Input changed resets state
+    // MARK: - Convert button resets override
 
-    func testInputChangedResetsState() {
+    func testConvertButtonResetsOverride() {
         sut.inputText = "41.40338, 2.17403"
         sut.convert()
-        XCTAssertEqual(sut.outputs.count, 5)
+        XCTAssertEqual(sut.detectedFormat, .dd)
 
-        sut.inputChanged()
-        XCTAssertTrue(sut.outputs.isEmpty)
-        XCTAssertNil(sut.detectedFormat)
+        sut.overrideFormat(.ddm)
+        XCTAssertTrue(sut.formatOverridden)
+
+        // Simulate Convert button: reset override, then convert
+        sut.formatOverridden = false
+        sut.convert()
+        XCTAssertEqual(sut.detectedFormat, .dd)
         XCTAssertFalse(sut.formatOverridden)
-        XCTAssertNil(sut.formattedInput)
     }
 }
