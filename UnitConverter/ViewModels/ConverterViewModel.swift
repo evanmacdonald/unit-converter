@@ -27,6 +27,16 @@ final class ConverterViewModel {
         }
     }
 
+    func reset() {
+        inputText = ""
+        detectedFormat = nil
+        selectedFormat = .dd
+        formatOverridden = false
+        formattedInput = nil
+        outputs = []
+        errorMessage = nil
+    }
+
     func convert() {
         errorMessage = nil
         formattedInput = nil
