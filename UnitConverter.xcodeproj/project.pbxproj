@@ -23,6 +23,8 @@
 		A100000004000002 /* MGRSConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000011 /* MGRSConverter.swift */; };
 		A100000004000003 /* UTMConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000012 /* UTMConverterTests.swift */; };
 		A100000004000004 /* MGRSConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000004000013 /* MGRSConverterTests.swift */; };
+		A100000005000001 /* PlusCodeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000005000010 /* PlusCodeConverter.swift */; };
+		A100000005000002 /* PlusCodeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000005000011 /* PlusCodeConverterTests.swift */; };
 		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 		A100000004000011 /* MGRSConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSConverter.swift; sourceTree = "<group>"; };
 		A100000004000012 /* UTMConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTMConverterTests.swift; sourceTree = "<group>"; };
 		A100000004000013 /* MGRSConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGRSConverterTests.swift; sourceTree = "<group>"; };
+		A100000005000010 /* PlusCodeConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCodeConverter.swift; sourceTree = "<group>"; };
+		A100000005000011 /* PlusCodeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCodeConverterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				A100000002000015 /* DMSConverter.swift */,
 				A100000004000010 /* UTMConverter.swift */,
 				A100000004000011 /* MGRSConverter.swift */,
+				A100000005000010 /* PlusCodeConverter.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				A100000002000018 /* DMSConverterTests.swift */,
 				A100000004000012 /* UTMConverterTests.swift */,
 				A100000004000013 /* MGRSConverterTests.swift */,
+				A100000005000011 /* PlusCodeConverterTests.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 				A100000002000006 /* DMSConverter.swift in Sources */,
 				A100000004000001 /* UTMConverter.swift in Sources */,
 				A100000004000002 /* MGRSConverter.swift in Sources */,
+				A100000005000001 /* PlusCodeConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +278,7 @@
 				A100000002000009 /* DMSConverterTests.swift in Sources */,
 				A100000004000003 /* UTMConverterTests.swift in Sources */,
 				A100000004000004 /* MGRSConverterTests.swift in Sources */,
+				A100000005000002 /* PlusCodeConverterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
