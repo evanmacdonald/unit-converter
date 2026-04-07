@@ -2,6 +2,13 @@ import Foundation
 
 enum DMSConverter: CoordinateConverter {
     static func parse(_ input: String) -> Coordinate? {
+        // Try standard format first: 41°24'12.17"N, 2°10'26.51"E
+        if let result = parseStandard(input) { return result }
+        // Try lenient format: 50 26 21.0700, -114 56 11.6474
+        return parseLenient(input)
+    }
+
+    private static func parseStandard(_ input: String) -> Coordinate? {
         let pattern = #"(\d+)\s*°\s*(\d+)\s*'\s*(\d+\.?\d*)\s*"\s*([NSns])\s*,\s*(\d+)\s*°\s*(\d+)\s*'\s*(\d+\.?\d*)\s*"\s*([EWew])"#
         guard let regex = try? NSRegularExpression(pattern: pattern),
               let match = regex.firstMatch(in: input, range: NSRange(input.startIndex..., in: input)) else {
@@ -27,6 +34,41 @@ enum DMSConverter: CoordinateConverter {
 
         if group(4).uppercased() == "S" { lat = -lat }
         if group(8).uppercased() == "W" { lon = -lon }
+
+        guard (-90...90).contains(lat), (-180...180).contains(lon) else {
+            return nil
+        }
+
+        return Coordinate(latitude: lat, longitude: lon)
+    }
+
+    private static func parseLenient(_ input: String) -> Coordinate? {
+        // Accepts: 50 26 21.0700, -114 56 11.6474  (sign prefix, spaces, no symbols)
+        let pattern = #"(-?\d+)\s+(\d+)\s+(\d+\.?\d*)\s*,\s*(-?\d+)\s+(\d+)\s+(\d+\.?\d*)"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: input, range: NSRange(input.startIndex..., in: input)) else {
+            return nil
+        }
+
+        func group(_ i: Int) -> String {
+            let range = Range(match.range(at: i), in: input)!
+            return String(input[range])
+        }
+
+        guard let latDegSigned = Double(group(1)),
+              let latMin = Double(group(2)),
+              let latSec = Double(group(3)),
+              let lonDegSigned = Double(group(4)),
+              let lonMin = Double(group(5)),
+              let lonSec = Double(group(6)) else {
+            return nil
+        }
+
+        let latSign: Double = latDegSigned < 0 ? -1 : 1
+        let lonSign: Double = lonDegSigned < 0 ? -1 : 1
+
+        let lat = latSign * (abs(latDegSigned) + latMin / 60.0 + latSec / 3600.0)
+        let lon = lonSign * (abs(lonDegSigned) + lonMin / 60.0 + lonSec / 3600.0)
 
         guard (-90...90).contains(lat), (-180...180).contains(lon) else {
             return nil

@@ -27,6 +27,7 @@
 		A100000005000002 /* PlusCodeConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000005000011 /* PlusCodeConverterTests.swift */; };
 		A100000006000001 /* ConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000006000010 /* ConverterViewModel.swift */; };
 		A100000006000002 /* ConverterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000006000011 /* ConverterViewModelTests.swift */; };
+		A100000007000001 /* CoordinateFormatDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000007000010 /* CoordinateFormatDetectionTests.swift */; };
 		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		A100000005000011 /* PlusCodeConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusCodeConverterTests.swift; sourceTree = "<group>"; };
 		A100000006000010 /* ConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModel.swift; sourceTree = "<group>"; };
 		A100000006000011 /* ConverterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModelTests.swift; sourceTree = "<group>"; };
+		A100000007000010 /* CoordinateFormatDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateFormatDetectionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				A100000001000012 /* UnitConverterTests.swift */,
 				A100000006000011 /* ConverterViewModelTests.swift */,
+				A100000007000010 /* CoordinateFormatDetectionTests.swift */,
 				A100000002000022 /* Converters */,
 			);
 			path = UnitConverterTests;
@@ -295,6 +298,7 @@
 				A100000004000004 /* MGRSConverterTests.swift in Sources */,
 				A100000005000002 /* PlusCodeConverterTests.swift in Sources */,
 				A100000006000002 /* ConverterViewModelTests.swift in Sources */,
+				A100000007000001 /* CoordinateFormatDetectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

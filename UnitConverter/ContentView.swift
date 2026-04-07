@@ -7,19 +7,13 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Input Format") {
-                    Picker("Format", selection: $viewModel.selectedFormat) {
-                        ForEach(CoordinateFormat.allCases) { format in
-                            Text(format.rawValue).tag(format)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-
                 Section("Coordinate") {
-                    TextField("Enter \(viewModel.selectedFormat.rawValue) coordinate", text: $viewModel.inputText)
+                    TextField("Enter coordinates (any format)", text: $viewModel.inputText)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        .onChange(of: viewModel.inputText) {
+                            viewModel.inputChanged()
+                        }
                         .onSubmit { viewModel.convert() }
 
                     Button("Convert") {
@@ -31,6 +25,43 @@ struct ContentView: View {
                         Text(error)
                             .foregroundStyle(.red)
                             .font(.caption)
+                    }
+                }
+
+                if viewModel.detectedFormat != nil || viewModel.formatOverridden {
+                    Section {
+                        Picker("Format", selection: Binding(
+                            get: { viewModel.selectedFormat },
+                            set: { viewModel.overrideFormat($0) }
+                        )) {
+                            ForEach(CoordinateFormat.allCases) { format in
+                                Text(format.rawValue).tag(format)
+                            }
+                        }
+                    } header: {
+                        if let detected = viewModel.detectedFormat, !viewModel.formatOverridden {
+                            Text("Detected: \(detected.rawValue)")
+                        } else {
+                            Text("Input Format")
+                        }
+                    }
+
+                    if let formatted = viewModel.formattedInput {
+                        Section("Formatted Input") {
+                            HStack {
+                                Text(formatted)
+                                    .font(.body.monospaced())
+                                Spacer()
+                                Button {
+                                    UIPasteboard.general.string = formatted
+                                } label: {
+                                    Image(systemName: "doc.on.doc")
+                                        .foregroundStyle(.accentColor)
+                                }
+                                .buttonStyle(.borderless)
+                                .accessibilityLabel("Copy formatted input")
+                            }
+                        }
                     }
                 }
 
