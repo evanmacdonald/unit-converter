@@ -13,9 +13,9 @@ Single-page SwiftUI iOS app that converts GPS coordinates between 6 formats (DD,
 - **PR #3**: Full CI/CD pipeline — fastlane, TestFlight on PR, App Store manual deploy
 - **PR #4**: UTM + MGRS converters (TDD) — transverse Mercator projection math
 - **PR #5**: Plus Codes / Open Location Code converter (TDD) — full codes only in v1, 18 tests
+- **PR #6**: UI + ViewModel — ConverterViewModel (@Observable), format picker, input field, Convert button, output rows with copy buttons, error feedback, 16 tests
 
 ### Remaining (in order)
-- **PR #6**: UI + ViewModel — format picker, input field, output rows with copy buttons
 - **PR #7**: Polish + App Store metadata, re-enable auto App Store deploy
 
 ## Architecture
@@ -65,11 +65,13 @@ To re-enable auto App Store deploy, change `release.yml` trigger from `workflow_
 ```
 UnitConverter/
   UnitConverterApp.swift          # @main entry point
-  ContentView.swift               # Single-page UI (placeholder, built in PR #6)
+  ContentView.swift               # Single-page UI — format picker, input, output rows
   Assets.xcassets/                # App icon
   Models/
     Coordinate.swift              # Canonical lat/lon model
-    CoordinateFormat.swift        # Enum of 6 formats
+    CoordinateFormat.swift        # Enum of 6 formats + converter mapping
+  ViewModels/
+    ConverterViewModel.swift      # @Observable VM — parse, convert, error state
   Converters/
     CoordinateConverter.swift     # Protocol
     DDConverter.swift             # Decimal Degrees
@@ -79,6 +81,7 @@ UnitConverter/
     MGRSConverter.swift           # Military Grid Reference System
     PlusCodeConverter.swift       # Open Location Code (Plus Codes)
 UnitConverterTests/
+  ConverterViewModelTests.swift
   Converters/
     DDConverterTests.swift
     DDMConverterTests.swift
