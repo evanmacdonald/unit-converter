@@ -20,6 +20,18 @@ struct ContentView: View {
                     TextField("Enter \(viewModel.selectedFormat.rawValue) coordinate", text: $viewModel.inputText)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
+                        .onSubmit { viewModel.convert() }
+
+                    Button("Convert") {
+                        viewModel.convert()
+                    }
+                    .frame(maxWidth: .infinity)
+
+                    if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundStyle(.red)
+                            .font(.caption)
+                    }
                 }
 
                 if !viewModel.outputs.isEmpty {

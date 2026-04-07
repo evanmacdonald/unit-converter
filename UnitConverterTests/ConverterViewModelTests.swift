@@ -25,24 +25,26 @@ final class ConverterViewModelTests: XCTestCase {
         XCTAssertTrue(sut.inputText.isEmpty)
     }
 
-    func testOutputsEmptyWhenInputEmpty() {
+    func testOutputsEmptyBeforeConvert() {
         XCTAssertTrue(sut.outputs.isEmpty)
     }
 
     // MARK: - Conversion from DD
 
-    func testOutputsPopulateForValidDDInput() {
+    func testConvertPopulatesOutputsForValidDD() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
 
-        let outputs = sut.outputs
-        XCTAssertEqual(outputs.count, 5)
-        XCTAssertFalse(outputs.contains { $0.format == .dd })
+        XCTAssertEqual(sut.outputs.count, 5)
+        XCTAssertFalse(sut.outputs.contains { $0.format == .dd })
+        XCTAssertNil(sut.errorMessage)
     }
 
     func testDDConvertsToAllOtherFormats() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
 
         let formats = Set(sut.outputs.map(\.format))
         XCTAssertTrue(formats.contains(.ddm))
@@ -55,6 +57,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testDDOutputValuesAreNonEmpty() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
 
         for row in sut.outputs {
             XCTAssertFalse(row.value.isEmpty, "\(row.format.rawValue) output should not be empty")
@@ -66,6 +69,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testDDMInput() {
         sut.selectedFormat = .ddm
         sut.inputText = "41°24.2028'N, 2°10.4418'E"
+        sut.convert()
 
         XCTAssertEqual(sut.outputs.count, 5)
         XCTAssertFalse(sut.outputs.contains { $0.format == .ddm })
@@ -74,6 +78,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testDMSInput() {
         sut.selectedFormat = .dms
         sut.inputText = "41°24'12.17\"N, 2°10'26.51\"E"
+        sut.convert()
 
         XCTAssertEqual(sut.outputs.count, 5)
         XCTAssertFalse(sut.outputs.contains { $0.format == .dms })
@@ -82,6 +87,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testUTMInput() {
         sut.selectedFormat = .utm
         sut.inputText = "31T 430960 4583867"
+        sut.convert()
 
         XCTAssertEqual(sut.outputs.count, 5)
         XCTAssertFalse(sut.outputs.contains { $0.format == .utm })
@@ -90,6 +96,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testMGRSInput() {
         sut.selectedFormat = .mgrs
         sut.inputText = "31TDF3095983866"
+        sut.convert()
 
         XCTAssertEqual(sut.outputs.count, 5)
         XCTAssertFalse(sut.outputs.contains { $0.format == .mgrs })
@@ -98,6 +105,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testPlusCodeInput() {
         sut.selectedFormat = .plusCode
         sut.inputText = "8FWC2345+G9"
+        sut.convert()
 
         XCTAssertEqual(sut.outputs.count, 5)
         XCTAssertFalse(sut.outputs.contains { $0.format == .plusCode })
@@ -105,30 +113,48 @@ final class ConverterViewModelTests: XCTestCase {
 
     // MARK: - Invalid Input
 
-    func testOutputsEmptyForInvalidInput() {
+    func testErrorMessageForInvalidInput() {
         sut.selectedFormat = .dd
         sut.inputText = "not a coordinate"
+        sut.convert()
 
         XCTAssertTrue(sut.outputs.isEmpty)
+        XCTAssertEqual(sut.errorMessage, "Invalid DD coordinate")
     }
 
-    func testOutputsEmptyForPartialInput() {
+    func testErrorMessageForPartialInput() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338"
+        sut.convert()
 
         XCTAssertTrue(sut.outputs.isEmpty)
+        XCTAssertNotNil(sut.errorMessage)
     }
 
-    // MARK: - Format Switching
-
-    func testChangingFormatRecalculatesOutputs() {
+    func testConvertEmptyInputClearsOutputsNoError() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
         XCTAssertEqual(sut.outputs.count, 5)
 
-        // Switch to DDM — the DD input is no longer valid DDM
-        sut.selectedFormat = .ddm
+        sut.inputText = ""
+        sut.convert()
         XCTAssertTrue(sut.outputs.isEmpty)
+        XCTAssertNil(sut.errorMessage)
+    }
+
+    // MARK: - Error clears on valid convert
+
+    func testErrorClearsOnValidConvert() {
+        sut.selectedFormat = .dd
+        sut.inputText = "bad"
+        sut.convert()
+        XCTAssertNotNil(sut.errorMessage)
+
+        sut.inputText = "41.40338, 2.17403"
+        sut.convert()
+        XCTAssertNil(sut.errorMessage)
+        XCTAssertEqual(sut.outputs.count, 5)
     }
 
     // MARK: - Output Row Identity
@@ -136,6 +162,7 @@ final class ConverterViewModelTests: XCTestCase {
     func testOutputRowsHaveUniqueIds() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
 
         let ids = sut.outputs.map(\.id)
         XCTAssertEqual(ids.count, Set(ids).count)
@@ -146,13 +173,13 @@ final class ConverterViewModelTests: XCTestCase {
     func testDDRoundTrip() {
         sut.selectedFormat = .dd
         sut.inputText = "41.40338, 2.17403"
+        sut.convert()
 
         guard let ddmRow = sut.outputs.first(where: { $0.format == .ddm }) else {
             XCTFail("DDM output missing")
             return
         }
 
-        // Parse the DDM output back
         let roundTrip = DDMConverter.parse(ddmRow.value)
         XCTAssertNotNil(roundTrip)
         XCTAssertTrue(roundTrip!.isEqual(to: Coordinate(latitude: 41.40338, longitude: 2.17403), accuracy: 1e-4))
