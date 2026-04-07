@@ -13,9 +13,10 @@ Single-page SwiftUI iOS app that converts GPS coordinates between 6 formats (DD,
 - **PR #3**: Full CI/CD pipeline — fastlane, TestFlight on PR, App Store manual deploy
 - **PR #4**: UTM + MGRS converters (TDD) — transverse Mercator projection math
 - **PR #5**: Plus Codes / Open Location Code converter (TDD) — full codes only in v1, 18 tests
+- **PR #6**: UI + ViewModel — format picker, input field, output rows with copy buttons
+- **PR #6a**: Clear/reset button — toolbar button resets all converter state
 
 ### Remaining (in order)
-- **PR #6**: UI + ViewModel — format picker, input field, output rows with copy buttons
 - **PR #7**: Polish + App Store metadata, re-enable auto App Store deploy
 
 ## Architecture
