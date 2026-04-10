@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var viewModel = ConverterViewModel()
     @State private var copiedFormat: CoordinateFormat?
+    @State private var showingMap = false
 
     var body: some View {
         NavigationStack {
@@ -14,12 +15,26 @@ struct ContentView: View {
             }
             .navigationTitle("GPS Converter")
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    if viewModel.parsedCoordinate != nil {
+                        Button {
+                            showingMap = true
+                        } label: {
+                            Label("Map", systemImage: "map")
+                        }
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Clear") {
                         viewModel.reset()
                         copiedFormat = nil
                     }
                     .disabled(viewModel.inputText.isEmpty && viewModel.outputs.isEmpty)
+                }
+            }
+            .fullScreenCover(isPresented: $showingMap) {
+                if let coord = viewModel.parsedCoordinate {
+                    MapView(coordinate: coord)
                 }
             }
         }

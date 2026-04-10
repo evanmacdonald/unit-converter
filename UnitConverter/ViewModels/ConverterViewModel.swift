@@ -11,6 +11,7 @@ final class ConverterViewModel {
     private(set) var formattedInput: String?
     private(set) var outputs: [OutputRow] = []
     private(set) var errorMessage: String?
+    private(set) var parsedCoordinate: Coordinate?
 
     struct OutputRow: Identifiable {
         let format: CoordinateFormat
@@ -35,6 +36,7 @@ final class ConverterViewModel {
         formattedInput = nil
         outputs = []
         errorMessage = nil
+        parsedCoordinate = nil
     }
 
     func convert() {
@@ -63,9 +65,12 @@ final class ConverterViewModel {
 
         guard let coordinate = selectedFormat.converter.parse(inputText) else {
             outputs = []
+            parsedCoordinate = nil
             errorMessage = "Invalid \(selectedFormat.rawValue) coordinate"
             return
         }
+
+        parsedCoordinate = coordinate
 
         // Show the properly formatted version of the input
         formattedInput = selectedFormat.converter.format(coordinate)
