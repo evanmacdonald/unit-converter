@@ -27,37 +27,34 @@ jobs:
       - name: Resolve simulator destination
         id: sim
         run: |
-          # Use xcodebuild -showdestinations to find a truly usable simulator
-          # (simctl reports devices as "available" even when the runtime isn't downloaded)
-          DEST=$(xcodebuild \
+          # Parse the UDID of a real iPhone simulator from xcodebuild -showdestinations.
+          # We must exclude placeholder entries (id:dvtdevice-...:placeholder) which
+          # appear first in the list and cause "unable to find a device" errors.
+          SIM_ID=$(xcodebuild \
             -project UnitConverter.xcodeproj \
             -scheme UnitConverter \
             -showdestinations 2>/dev/null \
             | grep "platform:iOS Simulator" \
-            | head -1 \
-            | grep -o "name:[^,}]*" \
-            | sed 's/name://' \
+            | grep -v "placeholder" \
+            | grep "name:iPhone" \
+            | tail -1 \
+            | grep -o " id:[^,}]*" \
+            | sed 's/ id://' \
             | xargs)
-          if [ -z "$DEST" ]; then
-            DEST=$(xcrun simctl list devices available -j | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          for runtime, devices in data['devices'].items():
-              if 'iOS' in runtime:
-                  for d in devices:
-                      if 'iPhone' in d['name'] and d['isAvailable']:
-                          print(d['name']); sys.exit(0)
-          " 2>/dev/null || echo "iPhone 16")
+          if [ -n "$SIM_ID" ]; then
+            echo "dest=id=$SIM_ID" >> "$GITHUB_OUTPUT"
+            echo "Using simulator id: $SIM_ID"
+          else
+            echo "dest=platform=iOS Simulator,name=iPhone 17 Pro" >> "$GITHUB_OUTPUT"
+            echo "Falling back to iPhone 17 Pro"
           fi
-          echo "name=$DEST" >> "$GITHUB_OUTPUT"
-          echo "Using simulator: $DEST"
 
       - name: Build & Test
         run: |
           xcodebuild test \
             -project UnitConverter.xcodeproj \
             -scheme UnitConverter \
-            -destination 'platform=iOS Simulator,name=${{ steps.sim.outputs.name }}' \
+            -destination '${{ steps.sim.outputs.dest }}' \
             -configuration Debug \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO
