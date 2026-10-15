@@ -28,6 +28,21 @@ final class DDMConverterTests: XCTestCase {
         XCTAssertNil(DDMConverter.parse(""))
     }
 
+    // From issue #15: SAR crews paste N/W suffix form from mapping apps.
+    func testParseIssue15DirectionalSuffix() {
+        let coord = DDMConverter.parse("30 17.11'N 095 28.07'W")
+        XCTAssertNotNil(coord)
+        XCTAssertEqual(coord!.latitude, 30 + 17.11 / 60.0, accuracy: 1e-6)
+        XCTAssertEqual(coord!.longitude, -(95 + 28.07 / 60.0), accuracy: 1e-6)
+    }
+
+    func testParseDirectionalPrefix() {
+        let coord = DDMConverter.parse("N 30 17.11 W 95 28.07")
+        XCTAssertNotNil(coord)
+        XCTAssertEqual(coord!.latitude, 30 + 17.11 / 60.0, accuracy: 1e-6)
+        XCTAssertEqual(coord!.longitude, -(95 + 28.07 / 60.0), accuracy: 1e-6)
+    }
+
     // MARK: - Formatting
 
     func testFormatNorthEast() {

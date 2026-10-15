@@ -2,6 +2,11 @@ import Foundation
 
 enum DDConverter: CoordinateConverter {
     static func parse(_ input: String) -> Coordinate? {
+        // Directional form with ° and comma: 30.285°N, 95.467°W → normalize first
+        if let normalized = DirectionalNormalizer.normalize(input),
+           let coord = parseDecimal(normalized) {
+            return coord
+        }
         if let coord = parseDirectional(input) { return coord }
         return parseDecimal(input)
     }

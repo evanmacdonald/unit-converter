@@ -19,6 +19,16 @@ final class ConverterViewModel {
         var id: String { format.id }
     }
 
+    /// All six formats as a plain-text block, ready for native share sheets.
+    /// Returns nil when there is nothing to share yet.
+    var shareText: String? {
+        guard let coordinate = parsedCoordinate else { return nil }
+        let lines = CoordinateFormat.allCases.map { format in
+            "\(format.rawValue): \(format.converter.format(coordinate))"
+        }
+        return (["GPS Coordinates"] + lines).joined(separator: "\n")
+    }
+
     /// Called when the user explicitly picks a format from the dropdown.
     func overrideFormat(_ format: CoordinateFormat) {
         selectedFormat = format
@@ -47,6 +57,7 @@ final class ConverterViewModel {
             outputs = []
             detectedFormat = nil
             formatOverridden = false
+            parsedCoordinate = nil
             return
         }
 
@@ -58,6 +69,7 @@ final class ConverterViewModel {
             } else {
                 detectedFormat = nil
                 outputs = []
+                parsedCoordinate = nil
                 errorMessage = "Could not detect coordinate format"
                 return
             }
