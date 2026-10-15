@@ -57,6 +57,7 @@ final class ConverterViewModel {
             outputs = []
             detectedFormat = nil
             formatOverridden = false
+            parsedCoordinate = nil
             return
         }
 
@@ -68,6 +69,7 @@ final class ConverterViewModel {
             } else {
                 detectedFormat = nil
                 outputs = []
+                parsedCoordinate = nil
                 errorMessage = "Could not detect coordinate format"
                 return
             }

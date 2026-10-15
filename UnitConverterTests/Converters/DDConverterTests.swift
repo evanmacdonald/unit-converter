@@ -47,6 +47,12 @@ final class DDConverterTests: XCTestCase {
         XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 50.982646, longitude: -117.027118)))
     }
 
+    func testParseDirectionalWithDegreeAndComma() {
+        let coord = DDConverter.parse("30.285°N, 95.467°W")
+        XCTAssertNotNil(coord)
+        XCTAssertTrue(coord!.isEqual(to: Coordinate(latitude: 30.285, longitude: -95.467)))
+    }
+
     func testParseMalformedReturnsNil() {
         XCTAssertNil(DDConverter.parse("not a coordinate"))
         XCTAssertNil(DDConverter.parse("41.40338"))

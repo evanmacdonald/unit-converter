@@ -240,6 +240,34 @@ final class ConverterViewModelTests: XCTestCase {
         XCTAssertNil(sut.shareText)
     }
 
+    func testShareTextClearsOnUnrecognizedInputAfterSuccess() {
+        sut.inputText = "41.40338, 2.17403"
+        sut.convert()
+        XCTAssertNotNil(sut.shareText)
+
+        sut.inputText = "garbage"
+        sut.formatOverridden = false
+        sut.convert()
+
+        XCTAssertNotNil(sut.errorMessage)
+        XCTAssertNil(sut.parsedCoordinate,
+                     "stale coordinate from the previous input must not persist")
+        XCTAssertNil(sut.shareText,
+                     "Share must not offer the previous location when the current input is bad")
+    }
+
+    func testShareTextClearsWhenInputBecomesEmptyAfterSuccess() {
+        sut.inputText = "41.40338, 2.17403"
+        sut.convert()
+        XCTAssertNotNil(sut.shareText)
+
+        sut.inputText = ""
+        sut.convert()
+
+        XCTAssertNil(sut.parsedCoordinate)
+        XCTAssertNil(sut.shareText)
+    }
+
     // MARK: - Convert button resets override
 
     func testConvertButtonResetsOverride() {
