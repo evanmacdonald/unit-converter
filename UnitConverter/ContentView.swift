@@ -4,6 +4,7 @@ struct ContentView: View {
     @State private var viewModel = ConverterViewModel()
     @State private var copiedFormat: CoordinateFormat?
     @State private var showingMap = false
+    @FocusState private var inputFocused: Bool
 
     var body: some View {
         NavigationStack {
@@ -25,11 +26,18 @@ struct ContentView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Clear") {
-                        viewModel.reset()
-                        copiedFormat = nil
+                    HStack {
+                        if let text = viewModel.shareText {
+                            ShareLink(item: text) {
+                                Label("Share", systemImage: "square.and.arrow.up")
+                            }
+                        }
+                        Button("Clear") {
+                            viewModel.reset()
+                            copiedFormat = nil
+                        }
+                        .disabled(viewModel.inputText.isEmpty && viewModel.outputs.isEmpty)
                     }
-                    .disabled(viewModel.inputText.isEmpty && viewModel.outputs.isEmpty)
                 }
             }
             .fullScreenCover(isPresented: $showingMap) {
@@ -40,16 +48,22 @@ struct ContentView: View {
         }
     }
 
+    private func runConvert() {
+        inputFocused = false
+        viewModel.formatOverridden = false
+        viewModel.convert()
+    }
+
     private var inputSection: some View {
         Section("Coordinate") {
             TextField("Enter coordinates (any format)", text: $viewModel.inputText)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
-                .onSubmit { viewModel.convert() }
+                .focused($inputFocused)
+                .onSubmit { runConvert() }
 
             Button("Convert") {
-                viewModel.formatOverridden = false
-                viewModel.convert()
+                runConvert()
             }
             .frame(maxWidth: .infinity)
 

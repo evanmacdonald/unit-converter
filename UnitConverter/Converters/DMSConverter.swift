@@ -2,7 +2,12 @@ import Foundation
 
 enum DMSConverter: CoordinateConverter {
     static func parse(_ input: String) -> Coordinate? {
-        // Try standard format first: 41°24'12.17"N, 2°10'26.51"E
+        // Directional form: 30 17 06.6"N 095 28 04.2"W → normalize then reuse lenient
+        if let normalized = DirectionalNormalizer.normalize(input),
+           let coord = parseLenient(normalized) {
+            return coord
+        }
+        // Try standard format: 41°24'12.17"N, 2°10'26.51"E
         if let result = parseStandard(input) { return result }
         // Try lenient format: 50 26 21.0700, -114 56 11.6474
         return parseLenient(input)

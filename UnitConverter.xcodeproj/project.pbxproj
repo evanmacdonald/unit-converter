@@ -29,6 +29,8 @@
 		A100000006000002 /* ConverterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000006000011 /* ConverterViewModelTests.swift */; };
 		A100000008000001 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000008000010 /* MapView.swift */; };
 		A100000007000001 /* CoordinateFormatDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000007000010 /* CoordinateFormatDetectionTests.swift */; };
+		A100000009000001 /* DirectionalNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000009000010 /* DirectionalNormalizer.swift */; };
+		A100000009000002 /* DirectionalNormalizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100000009000011 /* DirectionalNormalizerTests.swift */; };
 		A100000003000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A100000003000010 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		A100000008000010 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A100000006000011 /* ConverterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModelTests.swift; sourceTree = "<group>"; };
 		A100000007000010 /* CoordinateFormatDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateFormatDetectionTests.swift; sourceTree = "<group>"; };
+		A100000009000010 /* DirectionalNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalNormalizer.swift; sourceTree = "<group>"; };
+		A100000009000011 /* DirectionalNormalizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionalNormalizerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				A100000002000012 /* CoordinateConverter.swift */,
+				A100000009000010 /* DirectionalNormalizer.swift */,
 				A100000002000013 /* DDConverter.swift */,
 				A100000002000014 /* DDMConverter.swift */,
 				A100000002000015 /* DMSConverter.swift */,
@@ -162,6 +167,7 @@
 				A100000004000012 /* UTMConverterTests.swift */,
 				A100000004000013 /* MGRSConverterTests.swift */,
 				A100000005000011 /* PlusCodeConverterTests.swift */,
+				A100000009000011 /* DirectionalNormalizerTests.swift */,
 			);
 			path = Converters;
 			sourceTree = "<group>";
@@ -287,6 +293,7 @@
 				A100000005000001 /* PlusCodeConverter.swift in Sources */,
 				A100000006000001 /* ConverterViewModel.swift in Sources */,
 				A100000008000001 /* MapView.swift in Sources */,
+				A100000009000001 /* DirectionalNormalizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +310,7 @@
 				A100000005000002 /* PlusCodeConverterTests.swift in Sources */,
 				A100000006000002 /* ConverterViewModelTests.swift in Sources */,
 				A100000007000001 /* CoordinateFormatDetectionTests.swift in Sources */,
+				A100000009000002 /* DirectionalNormalizerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

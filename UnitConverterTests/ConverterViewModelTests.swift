@@ -211,6 +211,35 @@ final class ConverterViewModelTests: XCTestCase {
         XCTAssertTrue(roundTrip!.isEqual(to: Coordinate(latitude: 41.40338, longitude: 2.17403), accuracy: 1e-4))
     }
 
+    // MARK: - Share
+
+    func testShareTextNilBeforeConvert() {
+        XCTAssertNil(sut.shareText)
+    }
+
+    func testShareTextIncludesAllFormats() {
+        sut.inputText = "41.40338, 2.17403"
+        sut.convert()
+
+        let text = sut.shareText
+        XCTAssertNotNil(text)
+        for format in CoordinateFormat.allCases {
+            XCTAssertTrue(
+                text!.contains("\(format.rawValue):"),
+                "shareText should include \(format.rawValue)"
+            )
+        }
+    }
+
+    func testShareTextClearsOnReset() {
+        sut.inputText = "41.40338, 2.17403"
+        sut.convert()
+        XCTAssertNotNil(sut.shareText)
+
+        sut.reset()
+        XCTAssertNil(sut.shareText)
+    }
+
     // MARK: - Convert button resets override
 
     func testConvertButtonResetsOverride() {

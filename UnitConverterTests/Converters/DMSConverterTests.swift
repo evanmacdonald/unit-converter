@@ -28,6 +28,13 @@ final class DMSConverterTests: XCTestCase {
         XCTAssertNil(DMSConverter.parse(""))
     }
 
+    func testParseDirectionalSuffixNoComma() {
+        let coord = DMSConverter.parse("30 17 06.6\"N 95 28 04.2\"W")
+        XCTAssertNotNil(coord)
+        XCTAssertEqual(coord!.latitude, 30 + 17 / 60.0 + 6.6 / 3600.0, accuracy: 1e-6)
+        XCTAssertEqual(coord!.longitude, -(95 + 28 / 60.0 + 4.2 / 3600.0), accuracy: 1e-6)
+    }
+
     // MARK: - Formatting
 
     func testFormatNorthEast() {
